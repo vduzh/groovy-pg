@@ -1,5 +1,6 @@
 package by.vduzh.groovy.core
 
+import by.vduzh.groovy.core.example.Student
 import spock.lang.Specification
 
 class ClosureSpec extends Specification {
@@ -96,27 +97,33 @@ class ClosureSpec extends Specification {
         }
     }
 
-    def "addition should return the sum of two numbers"() {
-//        given: "a calculator instance"
-//        def calculator = new Calculator()
-//
-//        when: "adding two numbers"
-//        def result = calculator.add(3, 5)
-//
-//        then: "the result is their sum"
-//        result == 8
-        expect: "to be true all the time"
-        true == true
+    def "thisObject, owner and delegate of the closure return the test object"() {
+        given: "a closure"
+        Closure closure = {
+            firstName = "John"
+        }
+
+        expect:
+        closure.thisObject == this
+        println closure.owner == this
+        println closure.delegate == this
+
+        def student = new Student("Andy", "Ness", 35)
     }
 
-//    def "subtraction should return the difference of two numbers"() {
-//        given: "a calculator instance"
-//        def calculator = new Calculator()
-//
-//        when: "subtracting two numbers"
-//        def result = calculator.subtract(10, 4)
-//
-//        then: "the result is their difference"
-//        result == 6
-//    }
+    def "thisObject, owner and delegate of the closure return the test object"() {
+        given: "a student and a closure"
+        def student = new Student("Andy", "Ness", 35)
+
+        Closure closure = {
+            firstName = "John"
+        }
+        closure.delegate = student
+
+        when: "called the closure"
+        closure()
+
+        then: "the name of the student is John"
+        student.firstName == "John"
+    }
 }
