@@ -1,4 +1,4 @@
-package by.vduzh.groovy.core.classes
+package by.vduzh.groovy.core
 
 class FirstClass {
     static Integer privateValue

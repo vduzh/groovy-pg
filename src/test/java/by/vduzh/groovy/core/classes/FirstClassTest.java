@@ -1,5 +1,6 @@
 package by.vduzh.groovy.core.classes;
 
+import by.vduzh.groovy.core.FirstClass;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
